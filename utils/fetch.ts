@@ -32,4 +32,3 @@ export default async function getProps(): Promise<string|boolean|object> {
     throw error;
   }
 }
-"🕵🏻‍♂️ init"
