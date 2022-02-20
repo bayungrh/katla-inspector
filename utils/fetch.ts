@@ -22,8 +22,8 @@ export default async function getProps(): Promise<string|boolean|object> {
       const { pageProps } = getPageProps.body;
       const { hashed } = pageProps;
       const decodeHashed = decode(hashed);
-      const lastHashed = decodeHashed.split('::').slice(-1);
-      const decodeWord = decode(lastHashed[0]);
+      const lastHashed = decodeHashed.split('::')[1];
+      const decodeWord = decode(lastHashed);
       return decodeWord;
     }
     return false;
@@ -32,3 +32,4 @@ export default async function getProps(): Promise<string|boolean|object> {
     throw error;
   }
 }
+"🕵🏻‍♂️ init"
