@@ -4,7 +4,9 @@ import { fetchWord, fetchDefine } from '../utils/fetch';
 export default async function (_: VercelRequest, res: VercelResponse) {
   const word = await fetchWord();
   const defineWord = await fetchDefine(word);
-  const defineWordText = defineWord.join('<br/>');
+  const defineWordText = defineWord.map((w) => {
+    return `<li>${w}</li>`;
+  });
   res.send(`
     <!DOCTYPE html>
     <html>
@@ -16,8 +18,8 @@ export default async function (_: VercelRequest, res: VercelResponse) {
         <span style="font-size: 15pt;">Katla hari ini adalah :</span><br/><br/>
         <div style="width: 480px;">
           <hr style="border: 1px dashed darkgrey;"/>
-          <strong style="font-size: 21pt;">${word}</strong>
-          : ${defineWordText}
+          <strong style="font-size: 21pt;">${word}</strong> :
+          <ul>${defineWordText.join('')}</ul>
           <hr style="border: 1px dashed darkgrey;"/>
         </div>
         <div style="padding-top:20px;">
