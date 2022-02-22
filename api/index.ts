@@ -4,9 +4,12 @@ import { fetchWord, fetchDefine } from '../utils/fetch';
 export default async function (_: VercelRequest, res: VercelResponse) {
   const word = await fetchWord();
   const defineWord = await fetchDefine(word);
-  const defineWordText = defineWord.map((w) => {
-    return `<li>${w}</li>`;
-  });
+  let defineWordText = [];
+  if (defineWord && defineWord.length > 0) {
+    defineWordText = defineWord.map((w) => {
+      return `<li>${w}</li>`;
+    });
+  }
   res.send(`
     <!DOCTYPE html>
     <html>
