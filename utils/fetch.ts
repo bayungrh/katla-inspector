@@ -3,12 +3,14 @@ import cheerio from 'cheerio';
 import decode from './codec';
 
 const BASEURI = 'https://katla.id';
+const USERAGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.109 Safari/537.36';
 
 export async function fetchWord(): Promise<string> {
   try {
     const katla = await req
       .get(BASEURI)
       .headers({
+        'user-agent': USERAGENT,
         'referer': BASEURI
       });
     const $ = cheerio.load(katla.body);
@@ -44,6 +46,8 @@ export async function fetchDefine(word: string | string[]) {
     const reqDefine = await req
       .get(`${BASEURI}/api/define/${word}`)
       .headers({
+        'authorization': 'token bkZwZWC',
+        'user-agent': USERAGENT,
         'referer': BASEURI
       });
     return reqDefine.body;
